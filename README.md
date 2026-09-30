@@ -1,13 +1,15 @@
 # Left 4 Dead 2 5+ Player Coop
 
-A Left 4 Dead 2 dedicated server setup for **co-op with 5 (or more) players**, built on SourceMod,
+A Left 4 Dead 2 dedicated server setup for **co-op with more than 4 players**, built on SourceMod,
 plus four SourceMod plugins and a small addon written for it.
+
+**Set up for 5 players by default, and can go up to 8** - see [Up to 8 players](#up-to-8-players).
 
 Tested on a Windows dedicated server and on Linux (LinuxGSM), SourceMod 1.12, L4D2 2.2.4.3.
 
 ## Features
 
-- **5 survivors every round** - empty spots are filled with bots, extra survivors start with a pistol
+- **5 survivors every round** (default, up to 8) - empty spots are filled with bots, extra survivors start with a pistol
 - **Fixes for 5+ survivors** - identity, defib, charger, witch, transitions, finales and more
   (third-party plugins, see [THIRD_PARTY.md](THIRD_PARTY.md))
 - **Team HUD shows your 4 nearest teammates**
@@ -57,6 +59,39 @@ Compiled plugins, the addon and the server configs are in the
 
 `server.cfg` is set for 5 players (`sv_maxplayers 5`) and has an empty `sv_password` - set one to keep
 strangers out.
+
+## Up to 8 players
+
+Out of the box the server allows **5 players** and every round has **5 survivors** (bots fill empty
+spots). To go up to 8, change three settings and restart the server:
+
+1. `left4dead2/cfg/server.cfg` - how many players can join:
+   ```
+   sv_maxplayers 8
+   ```
+2. `left4dead2/cfg/sourcemod/l4dmultislots.cfg` - the most survivors there can be:
+   ```
+   l4d_multislots_max_survivors "8"
+   ```
+3. Same file - how many survivors every round starts with (bots fill the empty spots):
+   ```
+   l4d_multislots_min_survivors "8"
+   ```
+   Keep this at `"5"` (or `"4"`) if you'd rather not have extra bots when fewer people are playing -
+   players who join later still get their own survivor, up to the maximum.
+
+The start scripts already reserve enough slots (`-maxplayers 31 +sv_setmax 31`), so they don't need to
+change. The team HUD keeps showing your 4 nearest teammates.
+
+**8 survivors on Windows:** there are only 7 usable characters on a Windows server, because Zoey's
+character number (5) crashes it - with 8 survivors one of them will be a duplicate. On Linux, all 8
+survivors are unique (keep the three Zoey options at `1`).
+
+Anything between 5 and 8 works the same way - use the same number in all three places (or a lower
+`min_survivors`).
+
+This setup has been played and tested with 5 players. The plugins it uses are made for 5+ survivors
+(l4dmultislots supports up to 18), but 6-8 players haven't been tested here yet.
 
 ## For players
 
