@@ -3,6 +3,10 @@
 A Left 4 Dead 2 dedicated server setup for **co-op with more than 4 players**, built on SourceMod,
 plus four SourceMod plugins and a small addon written for it.
 
+**Note: anything that recommends disabling the Zoey options (e.g. `l4d_scs_zoey 0`, "Zoey crashes
+Windows servers") can be safely ignored. Valve patched the bug by 2023, and Zoey can now be used on
+Windows servers as well as Linux servers without issue.** See [About Zoey on Windows](#about-zoey-on-windows).
+
 **Set up for 5 players by default, and can go up to 8** - see [Up to 8 players](#up-to-8-players).
 
 Tested on a Windows dedicated server and on Linux (LinuxGSM), SourceMod 1.12, L4D2 2.2.4.3.
