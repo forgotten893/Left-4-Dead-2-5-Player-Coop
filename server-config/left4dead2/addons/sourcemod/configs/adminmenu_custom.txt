@@ -1,0 +1,306 @@
+// Custom admin menu commands.
+// For more information:
+//
+// http://wiki.alliedmods.net/Custom_Admin_Menu_%28SourceMod%29
+//
+// Note: This file must be in Valve KeyValues format (no multiline comments)
+//
+// Open with !admin. Everything here applies immediately, no vote.
+
+"Commands"
+{
+	"ServerCommands"
+	{
+		"Change Difficulty"
+		{
+			"cmd"		"z_difficulty #1"
+			"admin"		"sm_map"
+			"execute"	"server"
+			"1"
+			{
+				"type"		"list"
+				"title"		"Choose difficulty:"
+				"1"		"Easy"
+				"1."		"Easy"
+				"2"		"Normal"
+				"2."		"Normal"
+				"3"		"Hard"
+				"3."		"Advanced"
+				"4"		"Impossible"
+				"4."		"Expert"
+			}
+		}
+	}
+
+	"Change Campaign"
+	{
+		"Dead Center"
+		{
+			"cmd"		"changelevel #1"
+			"admin"		"sm_map"
+			"execute"	"server"
+			"1"
+			{
+				"type"		"list"
+				"title"		"Dead Center - choose chapter:"
+				"1"		"c1m1_hotel"
+				"1."		"1: Hotel"
+				"2"		"c1m2_streets"
+				"2."		"2: Streets"
+				"3"		"c1m3_mall"
+				"3."		"3: Mall"
+				"4"		"c1m4_atrium"
+				"4."		"4: Atrium"
+			}
+		}
+		"Dark Carnival"
+		{
+			"cmd"		"changelevel #1"
+			"admin"		"sm_map"
+			"execute"	"server"
+			"1"
+			{
+				"type"		"list"
+				"title"		"Dark Carnival - choose chapter:"
+				"1"		"c2m1_highway"
+				"1."		"1: Highway"
+				"2"		"c2m2_fairgrounds"
+				"2."		"2: Fairground"
+				"3"		"c2m3_coaster"
+				"3."		"3: Coaster"
+				"4"		"c2m4_barns"
+				"4."		"4: Barns"
+				"5"		"c2m5_concert"
+				"5."		"5: Concert"
+			}
+		}
+		"Swamp Fever"
+		{
+			"cmd"		"changelevel #1"
+			"admin"		"sm_map"
+			"execute"	"server"
+			"1"
+			{
+				"type"		"list"
+				"title"		"Swamp Fever - choose chapter:"
+				"1"		"c3m1_plankcountry"
+				"1."		"1: Plank Country"
+				"2"		"c3m2_swamp"
+				"2."		"2: Swamp"
+				"3"		"c3m3_shantytown"
+				"3."		"3: Shanty Town"
+				"4"		"c3m4_plantation"
+				"4."		"4: Plantation"
+			}
+		}
+		"Hard Rain"
+		{
+			"cmd"		"changelevel #1"
+			"admin"		"sm_map"
+			"execute"	"server"
+			"1"
+			{
+				"type"		"list"
+				"title"		"Hard Rain - choose chapter:"
+				"1"		"c4m1_milltown_a"
+				"1."		"1: Milltown"
+				"2"		"c4m2_sugarmill_a"
+				"2."		"2: Sugar Mill"
+				"3"		"c4m3_sugarmill_b"
+				"3."		"3: Mill Escape"
+				"4"		"c4m4_milltown_b"
+				"4."		"4: Return to Town"
+				"5"		"c4m5_milltown_escape"
+				"5."		"5: Town Escape"
+			}
+		}
+		"The Parish"
+		{
+			"cmd"		"changelevel #1"
+			"admin"		"sm_map"
+			"execute"	"server"
+			"1"
+			{
+				"type"		"list"
+				"title"		"The Parish - choose chapter:"
+				"1"		"c5m1_waterfront"
+				"1."		"1: Waterfront"
+				"2"		"c5m2_park"
+				"2."		"2: Park"
+				"3"		"c5m3_cemetery"
+				"3."		"3: Cemetery"
+				"4"		"c5m4_quarter"
+				"4."		"4: Quarter"
+				"5"		"c5m5_bridge"
+				"5."		"5: Bridge"
+			}
+		}
+		"The Passing"
+		{
+			"cmd"		"changelevel #1"
+			"admin"		"sm_map"
+			"execute"	"server"
+			"1"
+			{
+				"type"		"list"
+				"title"		"The Passing - choose chapter:"
+				"1"		"c6m1_riverbank"
+				"1."		"1: Riverbank"
+				"2"		"c6m2_bedlam"
+				"2."		"2: Underground"
+				"3"		"c6m3_port"
+				"3."		"3: Port"
+			}
+		}
+		"The Sacrifice"
+		{
+			"cmd"		"changelevel #1"
+			"admin"		"sm_map"
+			"execute"	"server"
+			"1"
+			{
+				"type"		"list"
+				"title"		"The Sacrifice - choose chapter:"
+				"1"		"c7m1_docks"
+				"1."		"1: Docks"
+				"2"		"c7m2_barge"
+				"2."		"2: Barge"
+				"3"		"c7m3_port"
+				"3."		"3: Port"
+			}
+		}
+		"No Mercy"
+		{
+			"cmd"		"changelevel #1"
+			"admin"		"sm_map"
+			"execute"	"server"
+			"1"
+			{
+				"type"		"list"
+				"title"		"No Mercy - choose chapter:"
+				"1"		"c8m1_apartment"
+				"1."		"1: Apartments"
+				"2"		"c8m2_subway"
+				"2."		"2: Subway"
+				"3"		"c8m3_sewers"
+				"3."		"3: Sewer"
+				"4"		"c8m4_interior"
+				"4."		"4: Hospital"
+				"5"		"c8m5_rooftop"
+				"5."		"5: Rooftop"
+			}
+		}
+		"Crash Course"
+		{
+			"cmd"		"changelevel #1"
+			"admin"		"sm_map"
+			"execute"	"server"
+			"1"
+			{
+				"type"		"list"
+				"title"		"Crash Course - choose chapter:"
+				"1"		"c9m1_alleys"
+				"1."		"1: Alleys"
+				"2"		"c9m2_lots"
+				"2."		"2: Truck Depot"
+			}
+		}
+		"Death Toll"
+		{
+			"cmd"		"changelevel #1"
+			"admin"		"sm_map"
+			"execute"	"server"
+			"1"
+			{
+				"type"		"list"
+				"title"		"Death Toll - choose chapter:"
+				"1"		"c10m1_caves"
+				"1."		"1: Turnpike"
+				"2"		"c10m2_drainage"
+				"2."		"2: Drains"
+				"3"		"c10m3_ranchhouse"
+				"3."		"3: Church"
+				"4"		"c10m4_mainstreet"
+				"4."		"4: Town"
+				"5"		"c10m5_houseboat"
+				"5."		"5: Boathouse"
+			}
+		}
+		"Dead Air"
+		{
+			"cmd"		"changelevel #1"
+			"admin"		"sm_map"
+			"execute"	"server"
+			"1"
+			{
+				"type"		"list"
+				"title"		"Dead Air - choose chapter:"
+				"1"		"c11m1_greenhouse"
+				"1."		"1: Greenhouse"
+				"2"		"c11m2_offices"
+				"2."		"2: Crane"
+				"3"		"c11m3_garage"
+				"3."		"3: Construction Site"
+				"4"		"c11m4_terminal"
+				"4."		"4: Terminal"
+				"5"		"c11m5_runway"
+				"5."		"5: Runway"
+			}
+		}
+		"Blood Harvest"
+		{
+			"cmd"		"changelevel #1"
+			"admin"		"sm_map"
+			"execute"	"server"
+			"1"
+			{
+				"type"		"list"
+				"title"		"Blood Harvest - choose chapter:"
+				"1"		"c12m1_hilltop"
+				"1."		"1: Woods"
+				"2"		"c12m2_traintunnel"
+				"2."		"2: Tunnel"
+				"3"		"c12m3_bridge"
+				"3."		"3: Bridge"
+				"4"		"c12m4_barn"
+				"4."		"4: Train Station"
+				"5"		"c12m5_cornfield"
+				"5."		"5: Farmhouse"
+			}
+		}
+		"Cold Stream"
+		{
+			"cmd"		"changelevel #1"
+			"admin"		"sm_map"
+			"execute"	"server"
+			"1"
+			{
+				"type"		"list"
+				"title"		"Cold Stream - choose chapter:"
+				"1"		"c13m1_alpinecreek"
+				"1."		"1: Alpine Creek"
+				"2"		"c13m2_southpinestream"
+				"2."		"2: South Pine Stream"
+				"3"		"c13m3_memorialbridge"
+				"3."		"3: Memorial Bridge"
+				"4"		"c13m4_cutthroatcreek"
+				"4."		"4: Cut-throat Creek"
+			}
+		}
+		"The Last Stand"
+		{
+			"cmd"		"changelevel #1"
+			"admin"		"sm_map"
+			"execute"	"server"
+			"1"
+			{
+				"type"		"list"
+				"title"		"The Last Stand - choose chapter:"
+				"1"		"c14m1_junkyard"
+				"1."		"1: The Junkyard"
+				"2"		"c14m2_lighthouse"
+				"2."		"2: Lighthouse"
+			}
+		}
+	}
+}

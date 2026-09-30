@@ -1,0 +1,22 @@
+Welcome! Type these in chat (with ! or /) or in the console (with sm_ in front).
+
+CHARACTERS  (Survivor Chat Select 2)
+  !csm  or  !model    Open the menu to pick your survivor (all 8 on L4D2 campaigns).
+                      Your pick is saved and comes back when you rejoin.
+  !voice              Change just your survivor's voice.
+
+CHAPTER STATS  (Last Chapter Results)
+  !lastresults  or  !slr   Every survivor's stats from the previous chapter.
+  !results  or  !sr        Every survivor's stats for this chapter so far.
+                           Shows the end-of-chapter highlights (Tank Slayer, Witch Hunter, Team Medic...)
+                           for all survivors, a stats line per survivor in chat, and a full table in your console.
+
+VOICE LINES  (Vocalize Spam)
+  Spam the vocalize menu like in L4D1 - new lines play on top of the old ones.
+  sm_vlines laugh     (console) List your survivor's lines containing a word.
+  sm_vline laughter12 (console) Say one exact line.
+  Key binds work too, e.g.  bind v "vocalize PlayerLaugh"   or   bind b "sm_vline laughter12"
+
+GENERAL  (SourceMod)
+  !revote             Change your answer while a vote is running.
+  motd                (type in chat, no !) Show this message again.

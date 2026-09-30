@@ -1,0 +1,5 @@
+# Built files go in GitHub Releases, not the repository
+*.smx
+*.vpk
+/release/
+__pycache__/

@@ -1,0 +1,9 @@
+"AddonInfo"
+{
+	addonSteamAppID		550
+	addontitle		"L4D2 Survivor Portraits on L4D1 Campaigns"
+	addonversion		1.0
+	addonauthor		"forgotten893"
+	addonDescription	"Switches the L4D1 campaigns (The Sacrifice, No Mercy, Crash Course, Death Toll, Dead Air, Blood Harvest, The Last Stand) to the L4D2 survivor set, so HUD portraits can show all 8 survivors. The server needs the same addon plus the l4d2_survivor_set plugin, which turns the spawned bots back into Bill, Zoey, Louis and Francis."
+	addonContent_Campaign	0
+}
