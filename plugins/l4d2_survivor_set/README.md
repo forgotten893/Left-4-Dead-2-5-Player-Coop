@@ -24,8 +24,9 @@ HUD shows whoever they picked.
 Campaigns: The Sacrifice, No Mercy, Crash Course, Death Toll, Dead Air, Blood Harvest, The Last Stand
 (map prefixes `c7m` - `c12m`, `c14m`). Cold Stream already uses the L4D2 set.
 
-Character number 5 (Zoey) crashes Windows servers. On Windows keep `l4d2_survivor_set_zoey5 0`: the
-Zoey bot then keeps Rochelle's number and shows Rochelle's portrait.
+Zoey's character number (5) used to crash Windows servers. Valve has fixed that (tested on a Windows
+server), so the Zoey bot gets number 5 and her own portrait. With `l4d2_survivor_set_zoey5 0` she keeps
+Rochelle's number instead (old behaviour).
 
 ## Requirements
 
@@ -42,7 +43,7 @@ Zoey bot then keeps Rochelle's number and shows Rochelle's portrait.
 |---|---|
 | `sm_survivorset` (root admin) | Show the survivor set in use and every survivor's number and model |
 | `l4d2_survivor_set_maps` | Map name prefixes of the L4D1 campaigns (default `c7m,c8m,c9m,c10m,c11m,c12m,c14m`) |
-| `l4d2_survivor_set_zoey5` `0` | 1 = the Zoey bot gets number 5. **Linux only.** |
+| `l4d2_survivor_set_zoey5` `1` | 1 = the Zoey bot gets number 5 (her own portrait). 0 = she keeps Rochelle's number. |
 | `l4d2_survivor_set_override` `0` | 1 = also switch the set server-side through Left4DHooks. Not needed with the addon; does **not** change players' HUDs on its own. |
 | `l4d2_survivor_set_debug` `0` | 1 = log bot changes to the server console |
 

@@ -12,8 +12,9 @@
  * Character numbers depend on the map's survivor set:
  *   L4D2 cast maps: 0 Nick, 1 Rochelle, 2 Coach, 3 Ellis, 4 Bill, 5 Zoey, 6 Francis, 7 Louis
  *   L4D1 cast maps: 0 Bill, 1 Zoey, 2 Louis, 3 Francis (4-7 are extra numbers for the same cast)
- * Number 5 and Zoey's model are never handed out: character 5 crashes Windows servers. On Linux,
- * l4d2_unique_survivors_zoey5 1 lets someone who already wears Zoey's model have number 5.
+ * Zoey (number 5 in the L4D2 set) used to crash Windows servers; Valve has fixed that (tested on a
+ * Windows server 2026-09-30), so she is used like everyone else. l4d2_unique_survivors_zoey5 0 still
+ * keeps number 5 and Zoey's model out of use, for anyone who needs the old behaviour.
  */
 
 #pragma semicolon 1
@@ -24,7 +25,7 @@
 #include <sdkhooks>
 #include <left4dhooks>
 
-#define PLUGIN_VERSION "1.3.0"
+#define PLUGIN_VERSION "1.4.0"
 #define TEAM_SURVIVOR  2
 #define SET_L4D1       1
 #define NUM_CHARS      8
@@ -52,13 +53,15 @@ static const char g_sModels[NUM_MODELS][] =
 static const int g_iNaturalModelL4D2[NUM_CHARS] = { M_NICK, M_ROCHELLE, M_COACH, M_ELLIS, M_BILL, M_ZOEY, M_FRANCIS, M_LOUIS };
 static const int g_iNaturalModelL4D1[NUM_CHARS] = { M_BILL, M_ZOEY, M_LOUIS, M_FRANCIS, M_BILL, M_ZOEY, M_FRANCIS, M_LOUIS };
 
-// Free character numbers to hand out, in order of preference (never 5).
-static const int g_iNumbersL4D2Map[] = { 4, 7, 6, 0, 1, 2, 3 };
-static const int g_iNumbersL4D1Map[] = { 4, 7, 6, 0, 2, 3 };
+// Free character numbers to hand out, in order of preference. Zoey's number (5 in the L4D2 set, 1 in
+// the L4D1 set) is skipped when l4d2_unique_survivors_zoey5 is 0 (see IsZoeyNumber).
+static const int g_iNumbersL4D2Map[] = { 4, 7, 6, 5, 0, 1, 2, 3 };
+static const int g_iNumbersL4D1Map[] = { 4, 7, 6, 0, 1, 2, 3 };
 
-// Fallback models when a number's natural model is already worn by someone (never Zoey).
-static const int g_iModelsL4D2Map[] = { M_BILL, M_LOUIS, M_FRANCIS, M_NICK, M_ELLIS, M_COACH, M_ROCHELLE };
-static const int g_iModelsL4D1Map[] = { M_NICK, M_ELLIS, M_COACH, M_ROCHELLE, M_BILL, M_LOUIS, M_FRANCIS };
+// Fallback models when a number's natural model is already worn by someone. Zoey's model is skipped
+// when l4d2_unique_survivors_zoey5 is 0.
+static const int g_iModelsL4D2Map[] = { M_BILL, M_LOUIS, M_FRANCIS, M_ZOEY, M_NICK, M_ELLIS, M_COACH, M_ROCHELLE };
+static const int g_iModelsL4D1Map[] = { M_NICK, M_ELLIS, M_COACH, M_ROCHELLE, M_BILL, M_ZOEY, M_LOUIS, M_FRANCIS };
 
 ConVar g_cvEnabled;
 ConVar g_cvZoey5;
@@ -76,7 +79,7 @@ public Plugin myinfo =
 public void OnPluginStart()
 {
 	g_cvEnabled = CreateConVar("l4d2_unique_survivors_enable", "1", "Switch duplicate-character survivor bots to an unused character (0 = off).", FCVAR_NOTIFY, true, 0.0, true, 1.0);
-	g_cvZoey5   = CreateConVar("l4d2_unique_survivors_zoey5", "0", "1 = someone wearing Zoey's model gets character number 5 (Zoey's HUD portrait). LINUX ONLY - number 5 crashes Windows servers.", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	g_cvZoey5   = CreateConVar("l4d2_unique_survivors_zoey5", "1", "1 = Zoey is used like everyone else (number 5, her own HUD portrait). 0 = never use Zoey's number or model (only for old Windows builds where number 5 crashed).", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	AutoExecConfig(true, "l4d2_unique_survivors");
 
 	HookEvent("round_start",  Event_RoundStart,  EventHookMode_PostNoCopy);
@@ -101,7 +104,7 @@ public void OnMapStart()
 
 // Makes survivors match their model (after !csm, or a bot changed with !csc). The HUD portrait and label
 // come from the character number, so everyone gets their model's number when this map's set has one
-// for it (L4D1 maps only have numbers for the L4D1 cast; 5 only with l4d2_unique_survivors_zoey5):
+// for it (L4D1 maps only have numbers for the L4D1 cast; Zoey's only with l4d2_unique_survivors_zoey5):
 // - humans first: they take the number unless another human has it. A bot holding it is moved to
 //   another character by FixDuplicates right away.
 // - bots: take the number only if nobody has it. They're also renamed to the model's survivor; a name
@@ -210,7 +213,7 @@ Action Timer_HudRefresh(Handle timer)
 }
 
 // The character number that shows this model's survivor on the HUD, or -1 if the set has none
-// (L4D2 survivors on L4D1 maps) or it is 5 and l4d2_unique_survivors_zoey5 is off (5 crashes Windows).
+// (L4D2 survivors on L4D1 maps) or it is 5 and l4d2_unique_survivors_zoey5 is off.
 int NumberForModel(int model, bool l4d1Map)
 {
 	if (l4d1Map)
@@ -349,12 +352,21 @@ int FixDuplicates()
 	return changed;
 }
 
+// Zoey's own number in this survivor set.
+bool IsZoeyNumber(int number, bool l4d1Map)
+{
+	return number == (l4d1Map ? 1 : 5);
+}
+
 int PickNumber(const bool[] numberTaken, bool l4d1Map)
 {
+	bool zoey = g_cvZoey5.BoolValue;
 	int count = l4d1Map ? sizeof(g_iNumbersL4D1Map) : sizeof(g_iNumbersL4D2Map);
 	for (int n = 0; n < count; n++)
 	{
 		int c = l4d1Map ? g_iNumbersL4D1Map[n] : g_iNumbersL4D2Map[n];
+		if (!zoey && IsZoeyNumber(c, l4d1Map))
+			continue;
 		if (!numberTaken[c])
 			return c;
 	}
@@ -363,17 +375,22 @@ int PickNumber(const bool[] numberTaken, bool l4d1Map)
 
 int PickModel(int number, const bool[] modelTaken, bool l4d1Map)
 {
+	bool zoey = g_cvZoey5.BoolValue;
 	int natural = l4d1Map ? g_iNaturalModelL4D1[number] : g_iNaturalModelL4D2[number];
-	if (natural != M_ZOEY && !modelTaken[natural])
+	if ((zoey || natural != M_ZOEY) && !modelTaken[natural])
 		return natural;
 
-	for (int n = 0; n < sizeof(g_iModelsL4D2Map); n++)
+	int count = l4d1Map ? sizeof(g_iModelsL4D1Map) : sizeof(g_iModelsL4D2Map);
+	for (int n = 0; n < count; n++)
 	{
 		int m = l4d1Map ? g_iModelsL4D1Map[n] : g_iModelsL4D2Map[n];
+		if (!zoey && m == M_ZOEY)
+			continue;
 		if (!modelTaken[m])
 			return m;
 	}
-	return natural == M_ZOEY ? M_BILL : natural; // everything worn already: keep the number's own look
+	// Everything worn already: keep the number's own look.
+	return (!zoey && natural == M_ZOEY) ? M_BILL : natural;
 }
 
 void SetCharacter(int client, int number, int model)

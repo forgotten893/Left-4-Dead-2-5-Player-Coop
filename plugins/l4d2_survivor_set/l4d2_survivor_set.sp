@@ -17,8 +17,9 @@
  *
  * Humans' character numbers follow their model through l4d2_unique_survivors (Timer_SyncSurvivors).
  *
- * Character number 5 (Zoey) crashes Windows servers, so it is only used when l4d2_survivor_set_zoey5 is 1
- * (set that on Linux). Otherwise the Zoey bot keeps number 1 (Rochelle's portrait).
+ * Character number 5 (Zoey) used to crash Windows servers; Valve has fixed that (tested on a Windows
+ * server 2026-09-30). With l4d2_survivor_set_zoey5 0 the Zoey bot keeps number 1 (Rochelle's portrait),
+ * for anyone who needs the old behaviour.
  *
  * Changing l4d2_survivor_set_override takes effect on the next map.
  */
@@ -31,7 +32,7 @@
 #include <sdkhooks>
 #include <left4dhooks>
 
-#define PLUGIN_VERSION "0.2.0"
+#define PLUGIN_VERSION "0.3.0"
 #define TEAM_SURVIVOR  2
 #define SET_L4D1       1
 #define SET_L4D2       2
@@ -77,7 +78,7 @@ public void OnPluginStart()
 	CreateConVar("l4d2_survivor_set_version", PLUGIN_VERSION, "Survivor Set version", FCVAR_NOTIFY | FCVAR_DONTRECORD);
 	g_cvOverride = CreateConVar("l4d2_survivor_set_override", "0", "1 = also report set 2 on set-1 maps server-side (Left4DHooks). Not needed when the server has the addon. Takes effect next map.", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	g_cvMaps     = CreateConVar("l4d2_survivor_set_maps", "c7m,c8m,c9m,c10m,c11m,c12m,c14m", "Map name prefixes of the L4D1-cast campaigns, comma separated. Bots spawning there as the L4D2 cast become the L4D1 cast.", FCVAR_NOTIFY);
-	g_cvZoey5    = CreateConVar("l4d2_survivor_set_zoey5", "0", "1 = use character number 5 for Zoey (LINUX ONLY - crashes Windows servers)", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	g_cvZoey5    = CreateConVar("l4d2_survivor_set_zoey5", "1", "1 = the Zoey bot gets character number 5 (her own HUD portrait). 0 = she keeps Rochelle's number (only for old Windows builds where number 5 crashed).", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	g_cvDebug    = CreateConVar("l4d2_survivor_set_debug", "0", "1 = log changes to the server console", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	AutoExecConfig(true, "l4d2_survivor_set");
 
@@ -181,7 +182,7 @@ Action Timer_Bot(Handle timer, int userid)
 	int newNum = target;
 	if (target == NUM_ZOEY && !g_cvZoey5.BoolValue)
 	{
-		newNum = num; // Windows: keep Rochelle's number, only look like Zoey
+		newNum = num; // zoey5 off: keep Rochelle's number, only look like Zoey
 	}
 
 	SetEntProp(client, Prop_Send, "m_survivorCharacter", newNum);

@@ -15,7 +15,9 @@ disappears from the HUD.
 - **Teammate portraits are redrawn**: clients don't redraw a teammate's portrait when the number
   changes, so the plugin reloads HUD Player Display Manager afterwards (same as its `!resethud`).
 
-Character number 5 (Zoey) crashes Windows servers. It is only used with `l4d2_unique_survivors_zoey5 1`.
+Zoey's character number (5) used to crash Windows servers. Valve has fixed that (tested on a Windows
+server), so she is handed out like everyone else. `l4d2_unique_survivors_zoey5 0` brings back the old
+"never use Zoey" behaviour if you need it.
 
 ## Requirements
 
@@ -28,7 +30,7 @@ Character number 5 (Zoey) crashes Windows servers. It is only used with `l4d2_un
 |---|---|
 | `sm_uniquecheck` (root admin) | Run the duplicate check now and list every survivor's number and model |
 | `l4d2_unique_survivors_enable` `1` | 0 = plugin off |
-| `l4d2_unique_survivors_zoey5` `0` | 1 = Zoey's model gets number 5 (Zoey's portrait). **Linux only.** |
+| `l4d2_unique_survivors_zoey5` `1` | 1 = Zoey is used like everyone else (number 5, her own portrait). 0 = never use Zoey's number or model. |
 
 Config: `cfg/sourcemod/l4d2_unique_survivors.cfg`
 

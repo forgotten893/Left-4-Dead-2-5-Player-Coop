@@ -65,11 +65,7 @@ Compiled plugins, the addon (for the server) and the server configs are in the
    ```
    "[U:1:12345678]"	"99:z"		// you - full admin
    ```
-5. **Windows servers only**: Zoey's character number (5) crashes Windows servers. Set these to `0`:
-   - `cfg/sourcemod/l4dscs.cfg`: `l4d_scs_zoey "0"`
-   - `cfg/sourcemod/l4d2_unique_survivors.cfg`: `l4d2_unique_survivors_zoey5 "0"`
-   - `cfg/sourcemod/l4d2_survivor_set.cfg`: `l4d2_survivor_set_zoey5 "0"`
-6. **Start it** with `start_l4d2_server.sh` (Linux) or `Start L4D2 Server.bat` (Windows), from the
+5. **Start it** with `start_l4d2_server.sh` (Linux) or `Start L4D2 Server.bat` (Windows), from the
    `server-config` folder, placed next to `srcds_run` / `srcds.exe`. Set `SERVER_IP` in the script first.
    Open port 27015 UDP + TCP. Players join with `connect <ip>:27015`.
 
@@ -99,9 +95,7 @@ spots). To go up to 8, change three settings and restart the server:
 The start scripts already reserve enough slots (`-maxplayers 31 +sv_setmax 31`), so they don't need to
 change. The team HUD keeps showing your 4 nearest teammates.
 
-**8 survivors on Windows:** there are only 7 usable characters on a Windows server, because Zoey's
-character number (5) crashes it - with 8 survivors one of them will be a duplicate. On Linux, all 8
-survivors are unique (keep the three Zoey options at `1`).
+With 8 survivors, all 8 characters are in use and every one of them is unique - on Windows and Linux.
 
 Anything between 5 and 8 works the same way - use the same number in all three places (or a lower
 `min_survivors`).
@@ -126,6 +120,16 @@ Commands (chat with `!`, console with `sm_`):
 | `sm_vlines <word>` | List your survivor's voice lines containing a word (console) |
 | `sm_vline <line>` | Say one exact line, e.g. `sm_vline laughter12` |
 | `bind v "vocalize PlayerLaugh"` | Voice lines work as key binds |
+
+## About Zoey on Windows
+
+Older guides and plugins (including Survivor Chat Select's `l4d_scs_zoey` option) say Zoey's character
+number, 5, crashes Windows servers, and use Rochelle's number for her instead. Valve has fixed that bug
+([Real Zoey Unlock](https://forums.alliedmods.net/showthread.php?t=308483) was withdrawn by its author
+for this reason), and it was confirmed on a Windows dedicated server here: Zoey as a player, as a bot,
+and on the L4D1 campaigns with the addon - no crashes. So Zoey is enabled everywhere by default
+(`l4d_scs_zoey "1"`, `l4d2_unique_survivors_zoey5 "1"`, `l4d2_survivor_set_zoey5 "1"`). If a server
+ever does crash with her, set those three to `0`.
 
 ## Credits
 
