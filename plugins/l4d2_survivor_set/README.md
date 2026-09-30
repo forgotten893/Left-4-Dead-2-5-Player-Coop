@@ -30,7 +30,8 @@ Zoey bot then keeps Rochelle's number and shows Rochelle's portrait.
 ## Requirements
 
 - [Left4DHooks](https://forums.alliedmods.net/showthread.php?t=321696)
-- The addon on the server (`left4dead2/addons/l4d2_survivorset.vpk`) and on every player's game
+- The addon on the server (`left4dead2/addons/l4d2_survivorset.vpk`, included in the release zip) and on
+  every player's game ([Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3810937801))
 - Recommended: [l4d2_unique_survivors](../l4d2_unique_survivors),
   [l4d2_vocalizebasedmodel](https://github.com/fbef0102/L4D1_2-Plugins/tree/master/l4d2_vocalizebasedmodel),
   [l4d2_trigger_flow_fix](https://github.com/fbef0102/L4D1_2-Plugins/tree/master/l4d2_trigger_flow_fix)

@@ -10,11 +10,11 @@ changed to `"2"`, plus `addoninfo.txt`. No models, sounds or scripts.
 
 ## Install
 
-The ready-made `.vpk` is in the [Releases](../../../releases).
-
-- **Players**: put it in `Left 4 Dead 2/left4dead2/addons/`, restart the game. It shows up under
-  Extras -> Add-ons.
-- **Server**: put it in `left4dead2/addons/` and restart. The server also needs the
+- **Players**: [subscribe on the Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3810937801)
+  and restart the game. It shows up under Extras -> Add-ons.
+- **Server**: dedicated servers can't subscribe to Workshop items, so the server zip in the
+  [Releases](../../../releases) includes the `.vpk` at `left4dead2/addons/l4d2_survivorset.vpk`.
+  Restart the server after copying it. The server also needs the
   [l4d2_survivor_set](../plugins/l4d2_survivor_set) plugin, otherwise the bots on these campaigns
   are the L4D2 cast.
 

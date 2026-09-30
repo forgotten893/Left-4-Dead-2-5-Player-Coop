@@ -27,9 +27,9 @@ Tested on a Windows dedicated server and on Linux (LinuxGSM), SourceMod 1.12, L4
 | [l4d2_vocalize_spam](plugins/l4d2_vocalize_spam) | L4D1-style voice line spam: new lines cut in or stack on top, key binds work, `sm_vline` / `sm_vlines`. |
 | [l4d2_survivor_set](plugins/l4d2_survivor_set) | With the addon below: HUD portraits for all 8 survivors on the L4D1 campaigns. |
 | [l4d2_lastresults](plugins/l4d2_lastresults) | `!lastresults` / `!results`: every survivor's chapter stats, not just 4. |
-| [addon](addon) | `l4d2_survivorset.vpk` - switches the L4D1 campaigns to the L4D2 survivor set. Server **and** every player need it. |
+| [addon](addon) | `l4d2_survivorset.vpk` - switches the L4D1 campaigns to the L4D2 survivor set. Server **and** every player need it. Players: [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3810937801). |
 
-Compiled plugins, the addon and the server configs are in the
+Compiled plugins, the addon (for the server) and the server configs are in the
 [Releases](../../releases). The source code is in this repository.
 
 ## Installing a server
@@ -96,8 +96,9 @@ This setup has been played and tested with 5 players. The plugins it uses are ma
 ## For players
 
 Everything works without installing anything, **except the HUD portraits of Nick, Rochelle, Coach and
-Ellis on the L4D1 campaigns**, which need the addon: put `l4d2_survivorset.vpk` from the release into
-`Left 4 Dead 2/left4dead2/addons/` and restart the game.
+Ellis on the L4D1 campaigns**, which need the addon:
+**[subscribe to L4D2 Survivor Portraits on L4D1 Campaigns on the Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3810937801)**
+and restart the game.
 
 Commands (chat with `!`, console with `sm_`):
 
