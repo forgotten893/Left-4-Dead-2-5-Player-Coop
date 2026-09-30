@@ -38,8 +38,24 @@ Compiled plugins, the addon (for the server) and the server configs are in the
    ```
    steamcmd +force_install_dir <server folder> +login anonymous +app_update 222860 validate +quit
    ```
-   Add `+@sSteamCmdForcePlatformType windows` or `linux` before `+app_update` if needed.
    On Linux, [LinuxGSM](https://linuxgsm.com/servers/l4d2server/) works too.
+
+   > **Linux / LinuxGSM - known SteamCMD bug:** the L4D2 dedicated server often won't download on
+   > Linux directly. The workaround is to download the **Windows** version first, then validate
+   > **without** forcing the platform, which replaces it with the Linux binaries:
+   >
+   > 1. Force the Windows download:
+   >    ```
+   >    steamcmd +@sSteamCmdForcePlatformType windows +force_install_dir <server folder> +login anonymous +app_update 222860 validate +quit
+   >    ```
+   > 2. Remove the force and validate. The same command without `+@sSteamCmdForcePlatformType windows`:
+   >    ```
+   >    steamcmd +force_install_dir <server folder> +login anonymous +app_update 222860 validate +quit
+   >    ```
+   >    With LinuxGSM, run `./l4d2server validate` instead. `<server folder>` is LinuxGSM's
+   >    `serverfiles` folder, e.g. `/home/l4d2server/serverfiles`.
+   >
+   > Afterwards `srcds_run` and the `.so` files should be in the server folder.
 2. **Install the third-party mods** listed in [THIRD_PARTY.md](THIRD_PARTY.md), from their own pages:
    Metamod:Source, SourceMod, L4DToolZ, the extensions and the plugins.
 3. **Download the release** and copy its `left4dead2` folder into the server's `left4dead2` folder
